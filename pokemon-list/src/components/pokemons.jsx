@@ -1,23 +1,16 @@
-import React, { useState } from "react";
-import usePokemon from '../hooks/usePokemon';
+import React from "react";
 
-const Pokemons = () => {
+const Pokemons = ({id, image, name, type, _callback }) => {
     
-    const [actual, setActual] = useState('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0');
-    const { pokemons, loading, anterior, siguiente } = usePokemon(actual)
-    
+  const style = type + " thumb-container";
     return (
-        loading ?
-            <p>Crgando pokemones...</p>
-        :
-        <div>
-            <ul>        
-                {pokemons.map((pokemons, index) => {
-                    return <li key={index}>{pokemons.name}</li>
-                })}
-            </ul>
-            <button onClick={() => anterior !== null && setActual(anterior)}>Anteriores</button>
-            <button onClick={() => siguiente !== null && setActual(siguiente)}>Siguientes</button>
+        <div className={style}>
+            <div className="number"><small>#0{id}</small></div>
+            <img src={image} alt={name} />
+            <div className="detail-wrapper">
+                <h3>{name}</h3>
+                <small>Type: {type}</small>
+            </div>
         </div>
     )
 }
